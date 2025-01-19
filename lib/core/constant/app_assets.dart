@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-
 class AppAssets {
   static String splashBG = "assets/images_png/background.png";
   static String QuraanBG = "assets/images_png/QuraanBG.png";
@@ -9,6 +7,7 @@ class AppAssets {
   static String radioBG =
       "assets/images_png/silhouette-woman-reading-quran.jpg";
   static String timeBG = "assets/images_png/timeBG.png";
+  static String fullLogo = "assets/images_png/Group 31.png";
 
   //vectors
   static String mosqueLine = "assets/images_png/Mosque-01.png";

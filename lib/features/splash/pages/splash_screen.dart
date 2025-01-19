@@ -1,7 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:new_app/core/constant/app_assets.dart';
-import 'package:new_app/features/layout/pages/layout_screen.dart';
+import 'package:new_app/features/onboarding/pages/onboarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   static String routeName = "splash";
@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
 
     Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, LayoutScreen.routeName);
+      Navigator.pushReplacementNamed(context, OnboardingScreen.routeName);
     });
   }
 

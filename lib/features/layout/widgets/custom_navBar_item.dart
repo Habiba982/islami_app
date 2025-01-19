@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:new_app/core/constant/app_assets.dart';
 import 'package:new_app/core/theme/app_colors.dart';
 
 class CustomNavbarItem extends StatelessWidget {

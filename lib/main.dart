@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:new_app/core/constant/servecies/local_storage_service.dart';
+import 'package:new_app/features/onboarding/pages/onboarding_screen.dart';
 import 'package:new_app/features/splash/pages/splash_screen.dart';
+
 import 'features/layout/pages/layout_screen.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await LocalStorageService.init();
   runApp(const MyApp());
 }
 
@@ -16,6 +22,7 @@ class MyApp extends StatelessWidget {
       initialRoute: SplashScreen.routeName,
       routes: {
         SplashScreen.routeName: (_) => const SplashScreen(),
+        OnboardingScreen.routeName: (_) => const OnboardingScreen(),
         LayoutScreen.routeName: (_) => const LayoutScreen(),
       },
     );

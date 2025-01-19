@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:new_app/core/constant/app_assets.dart';
 import 'package:new_app/features/layout/pages/hadeeth_screen.dart';
-import 'package:new_app/features/layout/pages/time_screen.dart';
 import 'package:new_app/features/layout/pages/quraan_screen.dart';
 import 'package:new_app/features/layout/pages/radio_screen.dart';
 import 'package:new_app/features/layout/pages/sbha_screen.dart';
+import 'package:new_app/features/layout/pages/time_screen.dart';
 import 'package:new_app/features/layout/widgets/custom_navBar_item.dart';
+
 import '../../../core/theme/app_colors.dart';
 
 class LayoutScreen extends StatefulWidget {
@@ -72,6 +73,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
                   iconPath: AppAssets.radioIcon),
               label: "Radio"),
           //Time Icon
+
           BottomNavigationBarItem(
               icon: CustomNavbarItem(
                   SelectedIndex: selectedIndex,
