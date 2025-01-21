@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:new_app/core/constant/app_assets.dart';
 import 'package:new_app/core/theme/app_colors.dart';
+import 'package:new_app/features/layout/pages/quraan/quraan_details.dart';
 import 'package:new_app/features/layout/pages/quraan/widget/recently.dart';
 import 'package:new_app/features/layout/pages/quraan/widget/sura_widget.dart';
 import 'package:new_app/models/recently_data.dart';
@@ -393,6 +394,7 @@ class QuraanScreen extends StatelessWidget {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
+                  fontFamily: "Janna",
                   color: AppColors.white,
                 ),
                 decoration: InputDecoration(
@@ -401,6 +403,7 @@ class QuraanScreen extends StatelessWidget {
                     color: AppColors.white,
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
+                    fontFamily: "Janna"
                   ),
                   fillColor: AppColors.secondaryColor.withOpacity(0.6),
                   filled: true,
@@ -429,6 +432,7 @@ class QuraanScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
+                  fontFamily: "Janna",
                   color: AppColors.white,
                 ),
               ),
@@ -453,6 +457,7 @@ class QuraanScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
+                  fontFamily: "Janna",
                   color: AppColors.white,
                 ),
               ),
@@ -461,12 +466,17 @@ class QuraanScreen extends StatelessWidget {
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
               padding: EdgeInsets.only(top: 0),
-              itemBuilder: (context, index) => SuraWidget(
+              itemBuilder: (context, index) => GestureDetector(
+                onTap: (){
+                  Navigator.pushNamed(context, QuraanDetails.routeName);
+                },
+                child: SuraWidget(
 
-                suraNameAR: suraNameAR[index],
-                suraNameEN: suraNameEN[index],
-                AyaNumber: AyaNumber[index].toString(),
-                suraNumber: (index+1).toString(),
+                  suraNameAR: suraNameAR[index],
+                  suraNameEN: suraNameEN[index],
+                  AyaNumber: AyaNumber[index].toString(),
+                  suraNumber: (index+1).toString(),
+                ),
               ),
               separatorBuilder: (context, index) => Divider(
                 endIndent: 70,

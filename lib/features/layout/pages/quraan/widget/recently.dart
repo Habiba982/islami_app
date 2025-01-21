@@ -12,7 +12,7 @@ class MostRecently extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 150,
-      width: 283,
+      width: 285,
       margin: EdgeInsets.symmetric(horizontal: 5,),
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
@@ -29,6 +29,7 @@ class MostRecently extends StatelessWidget {
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
+                  fontFamily: "Janna",
               ),
               ),
               Text(
@@ -36,6 +37,7 @@ class MostRecently extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
+                    fontFamily: "Janna",
                 ),
               ),
               Text(
@@ -43,6 +45,7 @@ class MostRecently extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
+                  fontFamily: "Janna",
                 ),
               ),
              ],

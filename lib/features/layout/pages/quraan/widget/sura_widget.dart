@@ -75,7 +75,7 @@ class SuraWidget extends StatelessWidget {
               fontSize: 20,
               fontWeight: FontWeight.bold,
               color: AppColors.white,
-              fontFamily: "Janna LT Bold",
+              fontFamily: "Janna",
             ),
           )
         ],

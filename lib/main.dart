@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:new_app/core/constant/servecies/local_storage_service.dart';
+import 'package:new_app/features/layout/pages/quraan/quraan_details.dart';
 import 'package:new_app/features/onboarding/pages/onboarding_screen.dart';
 import 'package:new_app/features/splash/pages/splash_screen.dart';
 
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         SplashScreen.routeName: (_) => const SplashScreen(),
         OnboardingScreen.routeName: (_) => const OnboardingScreen(),
         LayoutScreen.routeName: (_) => const LayoutScreen(),
+        QuraanDetails.routeName:(_)=> const QuraanDetails(),
       },
     );
   }

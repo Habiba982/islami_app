@@ -80,7 +80,7 @@ class _OnboardingScreen extends State<OnboardingScreen> {
                       child: Text(
                         "Back",
                         style: TextStyle(
-                          fontFamily: "janna",
+                          fontFamily: "Janna",
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                           color: AppColors.primaryColor,
@@ -120,7 +120,7 @@ class _OnboardingScreen extends State<OnboardingScreen> {
                           ? "Finish"
                           : "Next",
                       style: TextStyle(
-                        fontFamily: "janna",
+                        fontFamily: "Janna",
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: AppColors.primaryColor,
