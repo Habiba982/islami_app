@@ -9,6 +9,7 @@ class TimeScreen extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           image: DecorationImage(
+            fit: BoxFit.fill,
               image: AssetImage(
         AppAssets.timeBG,
       ))),

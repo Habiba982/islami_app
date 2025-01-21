@@ -4,11 +4,13 @@ import 'package:new_app/features/onboarding/pages/onboarding_screen.dart';
 import 'package:new_app/features/splash/pages/splash_screen.dart';
 
 import 'features/layout/pages/layout_screen.dart';
+import 'features/layout/pages/quraan/quraan_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await LocalStorageService.init();
+
   runApp(const MyApp());
 }
 

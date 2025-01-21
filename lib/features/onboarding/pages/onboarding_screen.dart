@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:new_app/core/constant/app_assets.dart';
+import 'package:new_app/core/constant/servecies/local_storage_key.dart';
+import 'package:new_app/core/constant/servecies/local_storage_service.dart';
 import 'package:new_app/core/theme/app_colors.dart';
 import 'package:new_app/features/layout/pages/layout_screen.dart';
 import 'package:new_app/features/onboarding/models/onboarding_models.dart';
@@ -19,6 +21,12 @@ class _OnboardingScreen extends State<OnboardingScreen> {
   var activateIndex = 0;
   var controller = PageController();
 
+  @override
+  void initState(){
+    super.initState();
+
+
+  }
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -58,12 +66,8 @@ class _OnboardingScreen extends State<OnboardingScreen> {
                     replacement: Spacer(),
                     child: TextButton(
                       onPressed: () {
-                        if (activateIndex ==
-                            OnboardingModels.onboardingList.length - 1) {
-                          Navigator.pushReplacementNamed(
-                              context, LayoutScreen.routeName);
-                          return;
-                        }
+
+
                         controller.previousPage(
                           duration: Duration(milliseconds: 500),
                           curve: Curves.easeInOut,
@@ -98,14 +102,17 @@ class _OnboardingScreen extends State<OnboardingScreen> {
                   Spacer(),
                   TextButton(
                     onPressed: () {
+                      if (activateIndex ==
+                          OnboardingModels.onboardingList.length - 1) {
+                        LocalStorageService.setBool(LocalStorageKey.isFirstTimeRun, false);
+                        Navigator.pushReplacementNamed(context, LayoutScreen.routeName);
+                        return;
+                      }
+
                       controller.nextPage(
                         duration: Duration(milliseconds: 500),
                         curve: Curves.easeInOut,
                       );
-                      if (activateIndex >
-                          OnboardingModels.onboardingList.length) {
-                        activateIndex++;
-                      }
                     },
                     child: Text(
                       activateIndex ==

@@ -1,13 +1,14 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:new_app/core/constant/app_assets.dart';
+import 'package:new_app/core/constant/servecies/local_storage_key.dart';
 import 'package:new_app/features/onboarding/pages/onboarding_screen.dart';
+import 'package:new_app/features/layout/pages/layout_screen.dart';
+import '../../../core/constant/servecies/local_storage_service.dart';
 
 class SplashScreen extends StatefulWidget {
   static String routeName = "splash";
-  static Duration _duration = Duration(
-    milliseconds: 1750,
-  );
+  static Duration _duration = Duration(milliseconds: 1750,);
 
   const SplashScreen({super.key});
 
@@ -20,8 +21,19 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-    Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, OnboardingScreen.routeName);
+    Future.delayed(const Duration(seconds: 2), () {
+      // Check if it's the first time the app is opened
+      var
+      isFirstTime = LocalStorageService.getBool(LocalStorageKey.isFirstTimeRun) ?? true;
+
+      if (isFirstTime) {
+        // Set the key to false after showing onboarding
+        LocalStorageService.setBool(LocalStorageKey.isFirstTimeRun, false);
+        Navigator.pushReplacementNamed(context, OnboardingScreen.routeName);
+      } else {
+        // Navigate to the main screen directly
+        Navigator.pushReplacementNamed(context, LayoutScreen.routeName);
+      }
     });
   }
 
@@ -50,9 +62,7 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
             Container(
-              margin: EdgeInsets.only(
-                bottom: size.height * 0.25,
-              ),
+              margin: EdgeInsets.only(bottom: size.height * 0.25),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: FadeInLeft(
@@ -66,9 +76,7 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
             Container(
-              margin: EdgeInsets.only(
-                top: size.height * 0.25,
-              ),
+              margin: EdgeInsets.only(top: size.height * 0.25),
               child: Align(
                 alignment: Alignment.centerRight,
                 child: FadeInRight(
@@ -104,10 +112,7 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
             Container(
-              margin: EdgeInsets.only(
-                top: size.height * 0.15,
-                bottom: size.height * 0.10,
-              ),
+              margin: EdgeInsets.only(top: size.height * 0.15, bottom: size.height * 0.10),
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: FadeInUp(
@@ -119,9 +124,7 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
             Container(
-              margin: EdgeInsets.only(
-                bottom: size.height * 0.09,
-              ),
+              margin: EdgeInsets.only(bottom: size.height * 0.09),
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: FadeInUp(
