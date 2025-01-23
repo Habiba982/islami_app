@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:new_app/core/constant/app_assets.dart';
 import 'package:new_app/core/theme/app_colors.dart';
+import 'package:new_app/models/sura_data.dart';
 
 class SuraWidget extends StatelessWidget {
-  final String suraNumber;
-  final String suraNameEN;
-  final String suraNameAR;
-  final String AyaNumber;
+  final SuraData suraData;
 
   const SuraWidget({super.key,
-    required this.suraNameEN,
-    required this.suraNameAR,
-    required this.AyaNumber,
-    required this.suraNumber});
+    required this.suraData});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +25,7 @@ class SuraWidget extends StatelessWidget {
               ),
             ),
               child:Text(
-                suraNumber,
+                suraData.id.toString(),
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -46,7 +41,7 @@ class SuraWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                suraNameEN,
+                suraData.suraNameEN,
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -58,7 +53,7 @@ class SuraWidget extends StatelessWidget {
                 height: 4,
               ),
               Text(
-                "$AyaNumber Verses",
+               "${suraData.verses} Verses",
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
@@ -70,7 +65,7 @@ class SuraWidget extends StatelessWidget {
           ),
           Spacer(),
           Text(
-            suraNameAR,
+            suraData.suraNameAR,
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
