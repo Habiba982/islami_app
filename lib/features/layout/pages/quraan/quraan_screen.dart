@@ -22,11 +22,7 @@ class _QuraanScreenState extends State<QuraanScreen> {
     _loadRecentSura();
   }
 
-  List<SuraData> recentlyData = [
-    SuraData(id: 1, suraNameEN: "Al-Fatiha", suraNameAR: "الفاتحه", verses: 7),
-    SuraData(
-        id: 2, suraNameEN: "Al-Baqarah", suraNameAR: "البقرة", verses: 286),
-  ];
+  List<SuraData> recentlyData = [];
   List<String> recentSuraIndexList = [];
 
   List<SuraData> suraList = [
@@ -281,10 +277,10 @@ class _QuraanScreenState extends State<QuraanScreen> {
   }
 
   _loadRecentSura() {
-    List<String> recentSuraIndex =
+    recentSuraIndexList =
         LocalStorageService.getStringList(LocalStorageKey.recentSura) ?? [];
 
-    for (var index in recentSuraIndex) {
+    for (var index in recentSuraIndexList) {
       var indexInt = int.parse(index);
       recentlyData.add(suraList[indexInt]);
     }

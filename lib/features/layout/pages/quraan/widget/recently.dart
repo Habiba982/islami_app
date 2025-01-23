@@ -27,7 +27,7 @@ class MostRecently extends StatelessWidget {
               Text(
                 recentlyData.suraNameEN,
               style: TextStyle(
-                  fontSize: 21,
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                   fontFamily: "Janna",
               ),
