@@ -264,19 +264,31 @@ class _QuraanScreenState extends State<QuraanScreen> {
   }
 
   _onSuraTab(int index) {
-    recentSuraIndexList.add(index.toString());
-    LocalStorageService.setList(
-      LocalStorageKey.recentSura,
-      recentSuraIndexList,
-    );
-
+    _saveSuraIndex(index);
     Navigator.of(context).pushNamed(
       QuraanDetails.routeName,
       arguments: suraList[index],
     );
   }
 
+  _saveSuraIndex(int index) async {
+    var indexString = index.toString();
+
+    if (recentSuraIndexList.contains(indexString)) return;
+    recentSuraIndexList.add(indexString);
+
+    await LocalStorageService.setList(
+      LocalStorageKey.recentSura,
+      recentSuraIndexList,
+    );
+    _loadRecentSura();
+    setState(() {});
+  }
+
   _loadRecentSura() {
+    recentSuraIndexList = [];
+    recentlyData = [];
+
     recentSuraIndexList =
         LocalStorageService.getStringList(LocalStorageKey.recentSura) ?? [];
 
@@ -284,6 +296,5 @@ class _QuraanScreenState extends State<QuraanScreen> {
       var indexInt = int.parse(index);
       recentlyData.add(suraList[indexInt]);
     }
-    setState(() {});
   }
 }
