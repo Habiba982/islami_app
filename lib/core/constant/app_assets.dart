@@ -11,6 +11,7 @@ class AppAssets {
   static String QuraanDetilsScreen ="assets/images_png/SouraDetailsScreen.png";
   static String hadithCard = "assets/images_png/hadith_card.png";
   static String hadithBG = "assets/images_png/BackgroundH.png";
+  static String fullLogo2 = "assets/images_png/fullLogo2.png";
 
   //vectors
   static String mosqueLine = "assets/images_png/Mosque-01.png";

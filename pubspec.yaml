@@ -29,6 +29,7 @@ flutter:
     - assets/images_png/
     - assets/icons/
     - assets/suras/
+    - assets/hadith/ahadeth.txt
 
   fonts:
     - family: "Janna"

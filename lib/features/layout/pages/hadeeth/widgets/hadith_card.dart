@@ -1,41 +1,61 @@
 import 'package:flutter/material.dart';
 import 'package:new_app/core/constant/app_assets.dart';
-import 'package:new_app/core/theme/app_colors.dart';
+import 'package:new_app/features/layout/pages/hadeeth/widgets/hadith_data.dart';
 
 class HadithCard extends StatelessWidget {
-  const HadithCard({super.key});
+  final HadthData hadithData;
+
+  const HadithCard({super.key, required this.hadithData});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: BoxDecoration(
+      width: double.infinity,
+      margin: EdgeInsets.only(
+        bottom: 15,
+        top: 10,
+      ),
+      decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(AppAssets.hadithCard),
-          ),
+          fit: BoxFit.fitHeight,
+        ),
         ),
         child: Column(
-          children: [
-            Text(
-              "الحد يث الأول",
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(
+            height: 45,
+          ),
+          Text(
+            hadithData.hadithTitle,
+            style: TextStyle(
+              fontSize: 23,
+              fontWeight: FontWeight.bold,
                 fontFamily: "Janna",
-                color: AppColors.primaryColor,
+            ),
+            ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: ListView(
+                children: [
+                  Text(hadithData.hadithContent,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "Janna",
+                      )),
+                  SizedBox(
+                    height: 45,
+                  )
+                ],
               ),
             ),
-            Text(
-              ''' عن أمـيـر المؤمنـين أبي حـفص عمر بن الخطاب رضي الله عنه ، قال : سمعت رسول الله صلى الله عـليه وسلم يـقـول : ( إنـما الأعـمـال بالنيات وإنـمـا لكـل امـرئ ما نـوى . فمن كـانت هجرته إلى الله ورسولـه فهجرتـه إلى الله ورسـوله ومن كانت هجرته لـدنيا يصـيبها أو امرأة ينكحها فهجرته إلى ما هاجر إليه ).
-رواه إمام المحد ثين أبـو عـبـد الله محمد بن إسماعـيل بن ابراهـيـم بن المغـيره بن بـرد زبه البخاري الجعـفي،[رقم:1] وابـو الحسـيـن مسلم بن الحجاج بن مـسلم القـشـيري الـنيسـابـوري [رقم :1907] رضي الله عنهما في صحيحيهما اللذين هما أصح الكتب المصنفه. 
-''',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                fontFamily: "Janna",
-                color: AppColors.primaryColor,
-              ),
             ),
           ],
-        ));
+      ),
+    );
   }
 }
