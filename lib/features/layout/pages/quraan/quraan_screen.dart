@@ -1,27 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:new_app/core/constant/app_assets.dart';
+import 'package:new_app/core/constant/servecies/local_storage_key.dart';
+import 'package:new_app/core/constant/servecies/local_storage_service.dart';
 import 'package:new_app/core/theme/app_colors.dart';
 import 'package:new_app/features/layout/pages/quraan/quraan_details.dart';
 import 'package:new_app/features/layout/pages/quraan/widget/recently.dart';
 import 'package:new_app/features/layout/pages/quraan/widget/sura_widget.dart';
-import 'package:new_app/models/recently_data.dart';
 import 'package:new_app/models/sura_data.dart';
 
-class QuraanScreen extends StatelessWidget {
-  QuraanScreen({super.key});
+class QuraanScreen extends StatefulWidget {
+  const QuraanScreen({super.key});
 
-  List<RecentlyData> recentlyData = [
-    RecentlyData(
-      suraNameAR: "الأنبياء",
-      suraNameEN: "Al-Anbiya",
-      suraVerses: "112 Verses ",
-    ),
-    RecentlyData(
-      suraNameAR: "الفاتحة",
-      suraNameEN: "Al-Fatiha",
-      suraVerses: "7 Verses  ",
-    ),
+  @override
+  State<QuraanScreen> createState() => _QuraanScreenState();
+}
+
+class _QuraanScreenState extends State<QuraanScreen> {
+  @override
+  void initState() {
+    super.initState();
+    _loadRecentSura();
+  }
+
+  List<SuraData> recentlyData = [
+    SuraData(id: 1, suraNameEN: "Al-Fatiha", suraNameAR: "الفاتحه", verses: 7),
+    SuraData(
+        id: 2, suraNameEN: "Al-Baqarah", suraNameAR: "البقرة", verses: 286),
   ];
+  List<String> recentSuraIndexList = [];
 
   List<SuraData> suraList = [
   SuraData(id: 1, suraNameEN: "Al-Fatiha", suraNameAR: "الفاتحه", verses: 7),
@@ -142,7 +148,10 @@ class QuraanScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Container(
+      width: double.infinity,
+      height: double.infinity,
       decoration: BoxDecoration(
         image: DecorationImage(
           fit: BoxFit.fill,
@@ -152,108 +161,133 @@ class QuraanScreen extends StatelessWidget {
         ),
       ),
       child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Image.asset(AppAssets.fullLogo),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: TextFormField(
-                cursorColor: AppColors.primaryColor,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                  fontFamily: "Janna",
-                  color: AppColors.white,
-                ),
-                decoration: InputDecoration(
-                  hintText: "Sura Name",
-                  hintStyle: TextStyle(
+        child: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Image.asset(
+                AppAssets.fullLogo,
+                height: size.height * 0.20,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: TextFormField(
+                  cursorColor: AppColors.primaryColor,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    fontFamily: "Janna",
                     color: AppColors.white,
+                  ),
+                  decoration: InputDecoration(
+                    hintText: "Sura Name",
+                    hintStyle: TextStyle(
+                        color: AppColors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "Janna"),
+                    fillColor: AppColors.secondaryColor.withOpacity(0.6),
+                    filled: true,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: AppColors.primaryColor,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      borderSide: BorderSide(
+                        color: AppColors.primaryColor,
+                      ),
+                    ),
+                    prefixIcon: ImageIcon(
+                      AssetImage(AppAssets.quraanIcon),
+                      color: AppColors.primaryColor,
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+                child: Text(
+                  "Most Recently",
+                  style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    fontFamily: "Janna"
-                  ),
-                  fillColor: AppColors.secondaryColor.withOpacity(0.6),
-                  filled: true,
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: AppColors.primaryColor,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide(
-                      color: AppColors.primaryColor,
-                    ),
-                  ),
-                  prefixIcon: ImageIcon(
-                    AssetImage(AppAssets.quraanIcon),
-                    color: AppColors.primaryColor,
+                    fontFamily: "Janna",
+                    color: AppColors.white,
                   ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-              child: Text(
-                "Most Recently",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: "Janna",
-                  color: AppColors.white,
+              SizedBox(
+                height: 155,
+                child: ListView.builder(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 13,
+                  ),
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) => MostRecently(
+                    recentlyData: recentlyData[index],
+                  ),
+                  itemCount: recentlyData.length,
                 ),
               ),
-            ),
-            SizedBox(
-              height: 155,
-              child: ListView.builder(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 13,
-                ),
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) => MostRecently(
-                  recentlyData: recentlyData[index],
-                ),
-                itemCount: recentlyData.length,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 4.0),
-              child: Text(
-                "Sura List",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: "Janna",
-                  color: AppColors.white,
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 4.0),
+                child: Text(
+                  "Sura List",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: "Janna",
+                    color: AppColors.white,
+                  ),
                 ),
               ),
-            ),
-            ListView.separated(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              padding: EdgeInsets.only(top: 0),
-              itemBuilder: (context, index) => GestureDetector(
-                onTap: (){
-                  Navigator.pushNamed(context, QuraanDetails.routeName,
-                  arguments: suraList[index]
-                  );
-                },
-                child: SuraWidget(
-                  suraData: suraList[index],
+              ListView.separated(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                padding: EdgeInsets.only(top: 0),
+                itemBuilder: (context, index) => GestureDetector(
+                  onTap: () => _onSuraTab(index),
+                  child: SuraWidget(
+                    suraData: suraList[index],
+                  ),
                 ),
+                separatorBuilder: (context, index) => Divider(
+                  endIndent: 70,
+                  indent: 70,
+                ),
+                itemCount: suraList.length,
               ),
-              separatorBuilder: (context, index) => Divider(
-                endIndent: 70,
-                indent: 70,
-              ),
-              itemCount: suraList.length,
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  _onSuraTab(int index) {
+    recentSuraIndexList.add(index.toString());
+    LocalStorageService.setList(
+      LocalStorageKey.recentSura,
+      recentSuraIndexList,
+    );
+
+    Navigator.of(context).pushNamed(
+      QuraanDetails.routeName,
+      arguments: suraList[index],
+    );
+  }
+
+  _loadRecentSura() {
+    List<String> recentSuraIndex =
+        LocalStorageService.getStringList(LocalStorageKey.recentSura) ?? [];
+
+    for (var index in recentSuraIndex) {
+      var indexInt = int.parse(index);
+      recentlyData.add(suraList[indexInt]);
+    }
+    setState(() {});
   }
 }

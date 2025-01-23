@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:new_app/core/constant/app_assets.dart';
 import 'package:new_app/core/theme/app_colors.dart';
-import 'package:new_app/models/recently_data.dart';
+import 'package:new_app/models/sura_data.dart';
 
 class MostRecently extends StatelessWidget {
- final RecentlyData recentlyData;
+  final SuraData recentlyData;
   const MostRecently({super.key,
     required this.recentlyData,});
 
@@ -27,8 +27,8 @@ class MostRecently extends StatelessWidget {
               Text(
                 recentlyData.suraNameEN,
               style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
+                  fontSize: 21,
+                  fontWeight: FontWeight.bold,
                   fontFamily: "Janna",
               ),
               ),
@@ -41,9 +41,9 @@ class MostRecently extends StatelessWidget {
                 ),
               ),
               Text(
-                recentlyData.suraVerses,
+                "${recentlyData.verses} Verses",
                 style: TextStyle(
-                  fontSize: 14,
+                  fontSize: 15,
                   fontWeight: FontWeight.bold,
                   fontFamily: "Janna",
                 ),
