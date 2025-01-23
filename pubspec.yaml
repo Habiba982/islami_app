@@ -15,6 +15,7 @@ dependencies:
   animate_do: ^3.3.4
   smooth_page_indicator: ^1.0.0 # Add a version constraint
   shared_preferences: ^2.0.17
+  carousel_slider:
 
 dev_dependencies:
   flutter_test:

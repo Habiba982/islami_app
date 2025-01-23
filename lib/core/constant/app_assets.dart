@@ -9,6 +9,8 @@ class AppAssets {
   static String timeBG = "assets/images_png/timeBG.png";
   static String fullLogo = "assets/images_png/Group 31.png";
   static String QuraanDetilsScreen ="assets/images_png/SouraDetailsScreen.png";
+  static String hadithCard = "assets/images_png/hadith_card.png";
+  static String hadithBG = "assets/images_png/BackgroundH.png";
 
   //vectors
   static String mosqueLine = "assets/images_png/Mosque-01.png";
