@@ -22,7 +22,12 @@ class _QuraanScreenState extends State<QuraanScreen> {
     _loadRecentSura();
   }
 
+  String seachBar = "";
+
   List<SuraData> recentlyData = [];
+
+  List <SuraData> searchSura = [];
+
   List<String> recentSuraIndexList = [];
 
   List<SuraData> suraList = [
@@ -169,6 +174,11 @@ class _QuraanScreenState extends State<QuraanScreen> {
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: TextFormField(
                   cursorColor: AppColors.primaryColor,
+                  onChanged: (value) {
+                    seachBar = value;
+                    search();
+                    setState(() {});
+                  },
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
@@ -202,80 +212,105 @@ class _QuraanScreenState extends State<QuraanScreen> {
                   ),
                 ),
               ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-                child: Text(
-                  "Most Recently",
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: "Janna",
-                    color: AppColors.white,
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 155,
-                child: Visibility(
-                  visible: recentlyData.isNotEmpty,
-                  replacement: Center(
-                      child: Text(
-                    "No Recent Suras",
-                    style: TextStyle(
-                        fontSize: 23,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: "Janna",
-                        color: AppColors.white),
-                  )),
-                  child: ListView.builder(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 13,
+              Visibility(
+                visible: seachBar.isEmpty,
+                replacement: ListView.separated(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  padding: EdgeInsets.only(top: 0),
+                  itemBuilder: (context, index) => GestureDetector(
+                    onTap: () => _onSuraTab(searchSura[index].id - 1),
+                    child: SuraWidget(
+                      suraData: searchSura[index],
                     ),
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) => GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(
-                          context,
-                          QuraanDetails.routeName,
-                          arguments: recentlyData[index],
-                        );
-                      },
-                      child: MostRecently(
-                        recentlyData: recentlyData[index],
+                  ),
+                  separatorBuilder: (context, index) => Divider(
+                    endIndent: 70,
+                    indent: 70,
+                  ),
+                  itemCount: seachBar.length,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20.0, vertical: 8.0),
+                      child: Text(
+                        "Most Recently",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: "Janna",
+                          color: AppColors.white,
+                        ),
                       ),
                     ),
-                    itemCount: recentlyData.length,
-                  ),
+                    SizedBox(
+                      height: 155,
+                      child: Visibility(
+                        visible: recentlyData.isNotEmpty,
+                        replacement: Center(
+                            child: Text(
+                          "No Recent Suras",
+                          style: TextStyle(
+                              fontSize: 23,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "Janna",
+                              color: AppColors.white),
+                        )),
+                        child: ListView.builder(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 13,
+                          ),
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) => GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                context,
+                                QuraanDetails.routeName,
+                                arguments: recentlyData[index],
+                              );
+                            },
+                            child: MostRecently(
+                              recentlyData: recentlyData[index],
+                            ),
+                          ),
+                          itemCount: recentlyData.length,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20.0, vertical: 4.0),
+                      child: Text(
+                        "Sura List",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: "Janna",
+                          color: AppColors.white,
+                        ),
+                      ),
+                    ),
+                    ListView.separated(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      padding: EdgeInsets.only(top: 0),
+                      itemBuilder: (context, index) => GestureDetector(
+                        onTap: () => _onSuraTab(suraList[index].id - 1),
+                        child: SuraWidget(
+                          suraData: suraList[index],
+                        ),
+                      ),
+                      separatorBuilder: (context, index) => Divider(
+                        endIndent: 70,
+                        indent: 70,
+                      ),
+                      itemCount: suraList.length,
+                    ),
+                  ],
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 4.0),
-                child: Text(
-                  "Sura List",
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: "Janna",
-                    color: AppColors.white,
-                  ),
-                ),
-              ),
-              ListView.separated(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                padding: EdgeInsets.only(top: 0),
-                itemBuilder: (context, index) => GestureDetector(
-                  onTap: () => _onSuraTab(index),
-                  child: SuraWidget(
-                    suraData: suraList[index],
-                  ),
-                ),
-                separatorBuilder: (context, index) => Divider(
-                  endIndent: 70,
-                  indent: 70,
-                ),
-                itemCount: suraList.length,
               ),
             ],
           ),
@@ -319,6 +354,17 @@ class _QuraanScreenState extends State<QuraanScreen> {
     for (var index in recentSuraIndexList) {
       var indexInt = int.parse(index);
       recentlyData.add(suraList[indexInt]);
+    }
+  }
+
+  void search() {
+    searchSura = [];
+    for (var sura in suraList) {
+      if (sura.suraNameEN.toLowerCase().contains(seachBar.toLowerCase()) ||
+          sura.suraNameAR.toLowerCase().contains(seachBar.toLowerCase()) ||
+          sura.id.toString() == seachBar) {
+        searchSura.add(sura);
+      }
     }
   }
 }
