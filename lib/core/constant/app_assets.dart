@@ -3,7 +3,7 @@ class AppAssets {
   static String QuraanBG = "assets/images_png/QuraanBG.png";
   static String HadeethBG =
       "assets/images_png/vertical-shot-hassan-ii-mosque-casablanca-morocco.jpg";
-  static String sbhaBG = "assets/images_png/sbha_background.jpg";
+  static String sebhaBG = "assets/images_png/sebhaBG.png";
   static String radioBG =
       "assets/images_png/silhouette-woman-reading-quran.jpg";
   static String timeBG = "assets/images_png/timeBG.png";
@@ -12,6 +12,7 @@ class AppAssets {
   static String hadithCard = "assets/images_png/hadith_card.png";
   static String hadithBG = "assets/images_png/BackgroundH.png";
   static String fullLogo2 = "assets/images_png/fullLogo2.png";
+  static String sebha = "assets/images_png/Sebha.png";
 
   //vectors
   static String mosqueLine = "assets/images_png/Mosque-01.png";
