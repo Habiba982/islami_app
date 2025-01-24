@@ -50,4 +50,8 @@ abstract class LocalStorageService {
   static List<String>? getStringList(String key) {
     return _preferences.getStringList(key);
   }
+
+  static Future<bool> remove(String key) async {
+    return await _preferences.remove(key);
+  }
 }

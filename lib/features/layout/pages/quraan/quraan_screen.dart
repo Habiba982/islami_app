@@ -217,15 +217,36 @@ class _QuraanScreenState extends State<QuraanScreen> {
               ),
               SizedBox(
                 height: 155,
-                child: ListView.builder(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 13,
+                child: Visibility(
+                  visible: recentlyData.isNotEmpty,
+                  replacement: Center(
+                      child: Text(
+                    "No Recent Suras",
+                    style: TextStyle(
+                        fontSize: 23,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "Janna",
+                        color: AppColors.white),
+                  )),
+                  child: ListView.builder(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 13,
+                    ),
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) => GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          QuraanDetails.routeName,
+                          arguments: recentlyData[index],
+                        );
+                      },
+                      child: MostRecently(
+                        recentlyData: recentlyData[index],
+                      ),
+                    ),
+                    itemCount: recentlyData.length,
                   ),
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) => MostRecently(
-                    recentlyData: recentlyData[index],
-                  ),
-                  itemCount: recentlyData.length,
                 ),
               ),
               Padding(
@@ -275,7 +296,10 @@ class _QuraanScreenState extends State<QuraanScreen> {
     var indexString = index.toString();
 
     if (recentSuraIndexList.contains(indexString)) return;
-    recentSuraIndexList.add(indexString);
+    if (recentSuraIndexList.length == 7) {
+      recentSuraIndexList.removeLast();
+    }
+    recentSuraIndexList.insert(0, indexString);
 
     await LocalStorageService.setList(
       LocalStorageKey.recentSura,
