@@ -69,7 +69,7 @@ class _SbhaScreenState extends State<SbhaScreen> {
                                 AppAssets.sebha,
                                 width: size.width * 0.99,
                                 height: size.height * 0.99,
-                                fit: BoxFit.fill,
+                                // fit: BoxFit.fill,
                               ),
                             ),
                           ),
