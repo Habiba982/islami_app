@@ -14,10 +14,10 @@ class _SbhaScreenState extends State<SbhaScreen> {
   double angle = 0;
   int currentIndex = 0;
   List<String> zekr = [
-    "الله أكبر",
-    "لا إله إلا الله",
+    "سبحان الله",
     "الحمدلله",
-    " سبحان الله"
+    "لا إله إلا الله",
+    " الله أكبر"
   ];
   @override
   Widget build(BuildContext context) {
