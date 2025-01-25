@@ -67,8 +67,8 @@ class _SbhaScreenState extends State<SbhaScreen> {
                               angle: angle,
                               child: Image.asset(
                                 AppAssets.sebha,
-                                width: size.width * 0.99,
-                                height: size.height * 0.99,
+                                width: size.width * 0.80,
+                                height: size.height * 0.80,
                                 // fit: BoxFit.fill,
                               ),
                             ),
