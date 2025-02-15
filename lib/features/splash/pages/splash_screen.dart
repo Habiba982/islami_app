@@ -2,8 +2,9 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:new_app/core/constant/app_assets.dart';
 import 'package:new_app/core/constant/servecies/local_storage_key.dart';
-import 'package:new_app/features/onboarding/pages/onboarding_screen.dart';
 import 'package:new_app/features/layout/pages/layout_screen.dart';
+import 'package:new_app/features/onboarding/pages/onboarding_screen.dart';
+
 import '../../../core/constant/servecies/local_storage_service.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -22,16 +23,13 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
 
     Future.delayed(const Duration(seconds: 2), () {
-      // Check if it's the first time the app is opened
       var
       isFirstTime = LocalStorageService.getBool(LocalStorageKey.isFirstTimeRun) ?? true;
 
       if (isFirstTime) {
-        // Set the key to false after showing onboarding
         LocalStorageService.setBool(LocalStorageKey.isFirstTimeRun, false);
         Navigator.pushReplacementNamed(context, OnboardingScreen.routeName);
       } else {
-        // Navigate to the main screen directly
         Navigator.pushReplacementNamed(context, LayoutScreen.routeName);
       }
     });
